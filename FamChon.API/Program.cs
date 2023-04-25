@@ -1,7 +1,14 @@
+using FamChron.API.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+
+builder.Services.AddDbContextPool<FamChronDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FamChronConnection")));
 
 var app = builder.Build();
 
