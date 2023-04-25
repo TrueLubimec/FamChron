@@ -1,0 +1,14 @@
+﻿namespace FamChron.API.Entities
+{
+    public class Events
+    {
+        public int id { get; set; }
+        public string Name { get; set; }
+        public DateTime Date { get; set; }
+        public string Description { get; set; }
+        public string PreviewPhoto { get; set; }
+        public string photos { get; set; }
+        public int StoryID { get; set; }
+        public int CharacterID { get; set; }
+    }
+}
