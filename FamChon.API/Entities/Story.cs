@@ -1,6 +1,6 @@
 ﻿namespace FamChron.API.Entities
 {
-    public class Stories
+    public class Story
     {
         public int id { get; set; }
         public string Name { get; set; }

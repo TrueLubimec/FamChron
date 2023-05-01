@@ -12,12 +12,12 @@ namespace FamChron.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Stories>().HasData(new Stories
+            modelBuilder.Entity<Story>().HasData(new Story
             {
                 id = 1,
                 Name = "The Beginning"
             });
-            modelBuilder.Entity<Events>().HasData(new Events
+            modelBuilder.Entity<Event>().HasData(new Event
             {
                 id = 1,
                 Name ="First step",
@@ -27,7 +27,7 @@ namespace FamChron.API.Data
                 Photos = "None",
                 StoryID = 1,
             });
-            modelBuilder.Entity<Characters>().HasData(new Characters
+            modelBuilder.Entity<Character>().HasData(new Character
             {
                 id = 1,
                 Name = "Coffee",
@@ -40,12 +40,19 @@ namespace FamChron.API.Data
                 id = 1,
                 UserName = "Lubimec"
             });
+            modelBuilder.Entity<TimeLine>().HasData(new TimeLine
+            {
+                Id = 1,
+                StoryId = 1,
+                EventsIds = 1
+            });
         }
-
-        public DbSet<Characters> Characters { get; set; }
-        public DbSet<Events> Events { get; set; }
-        public DbSet<Stories> Stories { get; set; }
+         
+        public DbSet<Character> Characters { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Story> Stories { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<TimeLine> TileLines { get; set; }
 
     }
 }

@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FamChron.Models\FamChron.Models.csproj" />
     <ProjectReference Include="..\FamChron\FamChron.Web.csproj" />
   </ItemGroup>
 

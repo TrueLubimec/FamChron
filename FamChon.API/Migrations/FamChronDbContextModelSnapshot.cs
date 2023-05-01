@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FamChron.API.Migrations
 {
-    [DbContext(typeof(FamChronDbContext))]
+    [DbContext(typeof(CorrectionDbContext))]
     partial class FamChronDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -22,7 +22,7 @@ namespace FamChron.API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FamChron.API.Entities.Characters", b =>
+            modelBuilder.Entity("FamChron.API.Entities.Character", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +59,7 @@ namespace FamChron.API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FamChron.API.Entities.Events", b =>
+            modelBuilder.Entity("FamChron.API.Entities.Event", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -97,7 +97,7 @@ namespace FamChron.API.Migrations
                         new
                         {
                             id = 1,
-                            Date = new DateTime(2023, 4, 25, 22, 1, 39, 645, DateTimeKind.Utc).AddTicks(3198),
+                            Date = new DateTime(2023, 4, 26, 17, 40, 55, 186, DateTimeKind.Utc).AddTicks(7702),
                             Description = "wOw",
                             Name = "First step",
                             Photos = "None",
@@ -106,7 +106,7 @@ namespace FamChron.API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FamChron.API.Entities.Stories", b =>
+            modelBuilder.Entity("FamChron.API.Entities.Story", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -127,6 +127,33 @@ namespace FamChron.API.Migrations
                         {
                             id = 1,
                             Name = "The Beginning"
+                        });
+                });
+
+            modelBuilder.Entity("FamChron.API.Entities.TimeLine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EventsIds")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TileLines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EventsIds = 1,
+                            StoryId = 1
                         });
                 });
 
