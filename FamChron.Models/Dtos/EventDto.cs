@@ -9,7 +9,7 @@ namespace FamChron.Models.Dtos
     public class EventDto
     {
         public int Id { get; set; }
-        public int EventID { get; set; }
+        public int StoryID { get; set; }
         public string EventName { get; set;}
         public string PreviewPhotoURL { get; set;}
 
