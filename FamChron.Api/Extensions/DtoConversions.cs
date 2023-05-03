@@ -16,7 +16,8 @@ namespace FamChron.API.Extensions
                         Id = _event.id,
                         StoryID = story.id,
                         EventName = _event.Name,
-                        PreviewPhotoURL = _event.PreviewPhoto
+                        PreviewPhotoURL = _event.PreviewPhoto,
+                        dateTime = _event.Date
                     }).ToList();
         }
     }

@@ -12,6 +12,7 @@ namespace FamChron.Models.Dtos
         public int StoryID { get; set; }
         public string EventName { get; set;}
         public string PreviewPhotoURL { get; set;}
+        public DateTime dateTime { get; set; }
 
     }
 }

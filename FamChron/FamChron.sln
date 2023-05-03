@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamChron.Models", "..\FamCh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamChron.Api", "..\FamChron.Api\FamChron.Api.csproj", "{3BD21342-FE97-441F-8EB2-E312001EDB70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamChron.Web", "..\FamChron.Web\FamChron.Web.csproj", "{3E56D8D0-C30F-4F85-8275-799459BE8254}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamChron.Web", "..\FamChron.Web\FamChron.Web.csproj", "{3E56D8D0-C30F-4F85-8275-799459BE8254}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

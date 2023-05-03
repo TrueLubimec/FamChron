@@ -1,0 +1,47 @@
+﻿@page "/"
+@inherits EventsBase
+
+@if (events == null)
+{
+    <h3> Loading events of your story... </h3>
+}
+else
+{
+    <h3 class="mb-5"> Events </h3>
+
+    var eventsCount = events.Count();
+
+    @if (eventsCount > 0)
+    {
+        const int itemsPerRow = 4;
+        var eventsRowList = new List<EventDto>();
+
+        @for (int i = 0; i < eventsCount; i++)
+        {
+            eventsRowList = events.Skip(i * itemsPerRow).Take(itemsPerRow).ToList();
+
+            <div class="row mt-3">
+
+                @foreach (var item in eventsRowList)
+                {
+                    <div class="col-md-3 mb-2">
+                        <a href="#">
+                            <div class="card">
+                                <img class="img-thumbnail" src="@item.PreviewPhotoURL">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">
+                                        @item.EventName
+                                    </h5>
+                                    <p class="card-text">
+                                        <b> @item.dateTime.ToString("d")</b>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                }
+            </div>
+        }
+    }
+}
