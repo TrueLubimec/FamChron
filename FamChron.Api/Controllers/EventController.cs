@@ -37,7 +37,7 @@ namespace FamChron.API.Controllers
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                            "Error retrieving data from the database");
+                            "PIZDEC SNOVA NE BACHIT");
                 
             }
         }

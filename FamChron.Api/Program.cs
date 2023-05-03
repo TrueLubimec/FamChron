@@ -14,6 +14,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<FamChronDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FamChronConnection")));
 
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
