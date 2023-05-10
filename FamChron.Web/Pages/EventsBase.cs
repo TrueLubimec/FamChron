@@ -6,6 +6,7 @@ namespace FamChron.Web.Pages
 {
     public class EventsBase : ComponentBase
     {
+        [Inject]
         public IEventService eventService { get; set; }
         
         public IEnumerable<EventDto> events { get; set; }

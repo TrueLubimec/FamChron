@@ -22,25 +22,7 @@ else
 
             <div class="row mt-3">
 
-                @foreach (var item in eventsRowList)
-                {
-                    <div class="col-md-3 mb-2">
-                        <a href="#">
-                            <div class="card">
-                                <img class="img-thumbnail" src="@item.PreviewPhotoURL">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">
-                                        @item.EventName
-                                    </h5>
-                                    <p class="card-text">
-                                        <b> @item.dateTime.ToString("d")</b>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
-                }
+                <DisplayEvents Events="@eventsRowList"></DisplayEvents>
             </div>
         }
     }
