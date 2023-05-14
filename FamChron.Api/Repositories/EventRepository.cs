@@ -13,9 +13,10 @@ namespace FamChron.API.Repositories
         {
             this.famChronDbContext = famChronDbContext;
         }
-        public Task<Event> GetEvent(int id)
+        public async Task<Event> GetEvent(int id)
         {
-            throw new NotImplementedException();
+            var anEvent = await this.famChronDbContext.Events.FindAsync(id);
+            return anEvent;
         }
 
         public async Task<IEnumerable<Event>> GetEvents()
@@ -30,9 +31,10 @@ namespace FamChron.API.Repositories
             return stories;
         }
 
-        public Task<Story> GetStory(int id)
+        public async Task<Story> GetStory(int id)
         {
-            throw new NotImplementedException();
+            var story = await famChronDbContext.Stories.SingleOrDefaultAsync(a => a.id == id);
+            return story;
         }
     }
 }

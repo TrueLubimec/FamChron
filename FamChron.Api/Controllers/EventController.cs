@@ -41,5 +41,31 @@ namespace FamChron.API.Controllers
                 
             }
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<EventDto>> GetEvent(int id)
+        {
+            try
+            {
+                var anEvent = await this.eventRepository.GetEvent(id);
+
+                if (anEvent == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    var story = await this.eventRepository.GetStory(anEvent.StoryID);
+
+                    return Ok();
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                            "PIZDEC SNOVA NE BACHIT");
+
+            }
+        }
     }
 }
