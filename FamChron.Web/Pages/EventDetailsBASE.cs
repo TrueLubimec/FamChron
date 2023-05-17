@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace FamChron.Web.Pages
 {
-    public class EventDetailBASE : ComponentBase
+    public class EventDetailsBASE : ComponentBase
     {
 
         [Parameter]

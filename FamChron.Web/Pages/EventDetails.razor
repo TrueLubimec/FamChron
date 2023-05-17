@@ -1,13 +1,13 @@
 ﻿@page "/eventdetails/{id:int}"
 @using FamChron.Web.Pages
-@inherits EventDetailBASE
+@inherits EventDetailsBASE
 
 
-
-
+@if (anEvent == null && ErrorMessage == null)
+{
     <h3>Loading your story's event...</h3>
-
-@if (ErrorMessage != null)
+}
+else if (ErrorMessage != null)
 {
     <h3 class="text-danger">Треш, конечно @ErrorMessage</h3>
 }
@@ -23,7 +23,7 @@ else
             <p class="mb-4">@anEvent.Description</p>
             <p class="mb-4">
                 <b>
-                    @anEvent.dateTime.ToString("C")&nbsp;(@anEvent.StoryID)
+                    @anEvent.dateTime.ToString("D")&nbsp;(@anEvent.StoryID)
                 </b>
             </p>
         </div>
