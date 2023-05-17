@@ -1,9 +1,9 @@
-﻿using FamChron.API.Data;
-using FamChron.API.Entities;
-using FamChron.API.Repositories.Contracts;
+﻿using FamChron.Api.Data;
+using FamChron.Api.Entities;
+using FamChron.Api.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamChron.API.Repositories
+namespace FamChron.Api.Repositories
 {
     public class EventRepository : IEventRepository
     {

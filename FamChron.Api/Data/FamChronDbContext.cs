@@ -1,7 +1,7 @@
-﻿using FamChron.API.Entities;
+﻿using FamChron.Api.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace FamChron.API.Data
+namespace FamChron.Api.Data
 {
     public class FamChronDbContext : DbContext
     {

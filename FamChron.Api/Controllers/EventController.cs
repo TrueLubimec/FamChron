@@ -1,10 +1,10 @@
-﻿using FamChron.API.Extensions;
-using FamChron.API.Repositories.Contracts;
+﻿using FamChron.Api.Extensions;
+using FamChron.Api.Repositories.Contracts;
 using FamChron.Models.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FamChron.API.Controllers
+namespace FamChron.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

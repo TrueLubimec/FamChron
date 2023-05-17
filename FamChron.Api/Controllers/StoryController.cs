@@ -1,5 +1,5 @@
-﻿using FamChron.API.Entities;
-using FamChron.API.Repositories.Contracts;
+﻿using FamChron.Api.Entities;
+using FamChron.Api.Repositories.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

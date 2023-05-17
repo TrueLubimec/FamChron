@@ -1,7 +1,7 @@
-﻿using FamChron.API.Entities;
+﻿using FamChron.Api.Entities;
 using FamChron.Models.Dtos;
 
-namespace FamChron.API.Extensions
+namespace FamChron.Api.Extensions
 {
     public static class DtoConversions
     {

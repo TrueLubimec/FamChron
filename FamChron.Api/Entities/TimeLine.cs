@@ -1,4 +1,4 @@
-﻿namespace FamChron.API.Entities
+﻿namespace FamChron.Api.Entities
 {
     public class TimeLine
     {

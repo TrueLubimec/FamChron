@@ -1,6 +1,7 @@
-using FamChron.API.Data;
-using FamChron.API.Repositories;
-using FamChron.API.Repositories.Contracts;
+using FamChron.Api.Repositories;
+using FamChron.Api.Repositories.Contracts;
+using FamChron.Api.Data;
+using FamChron.Api.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
 
@@ -15,6 +16,7 @@ builder.Services.AddDbContextPool<FamChronDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FamChronConnection")));
 
 builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IStorysEventsRepository, StorysEventsRepository>();
 
 var app = builder.Build();
 

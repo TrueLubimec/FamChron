@@ -1,6 +1,6 @@
-﻿using FamChron.API.Entities;
+﻿using FamChron.Api.Entities;
 
-namespace FamChron.API.Repositories.Contracts
+namespace FamChron.Api.Repositories.Contracts
 {
     public interface IEventRepository
     {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace FamChron.API.Migrations
+namespace FamChron.Api.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
