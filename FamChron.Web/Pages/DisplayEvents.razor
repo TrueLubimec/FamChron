@@ -3,7 +3,7 @@
 @foreach (var item in Events)
 {
     <div class="col-md-3 mb-2">
-        <a href="#">
+        <a href="/eventdetails/@item.Id">
             <div class="card">
                 <img class="img-thumbnail" src="@item.PreviewPhotoURL">
                 <div class="card-body">
@@ -16,6 +16,5 @@
                 </div>
             </div>
         </a>
-
     </div>
 }

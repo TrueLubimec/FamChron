@@ -51,13 +51,15 @@ namespace FamChron.API.Controllers
 
                 if (anEvent == null)
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
                 else
                 {
                     var story = await this.eventRepository.GetStory(anEvent.StoryID);
 
-                    return Ok();
+                    var eventDto = anEvent.ConvertToDto(story);
+
+                    return Ok(eventDto);
                 }
             }
             catch (Exception)

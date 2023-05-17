@@ -17,8 +17,23 @@ namespace FamChron.API.Extensions
                         StoryID = story.id,
                         EventName = _event.Name,
                         PreviewPhotoURL = _event.PreviewPhoto,
-                        dateTime = _event.Date
+                        dateTime = _event.Date,
+                        Description= _event.Description
                     }).ToList();
+        }
+
+        public static EventDto ConvertToDto(this Event anEvent,
+                                                 Story story)
+        {
+            return new EventDto
+            {
+                Id = anEvent.id,
+                StoryID = story.id,
+                EventName = anEvent.Name,
+                PreviewPhotoURL = anEvent.PreviewPhoto,
+                dateTime = anEvent.Date,
+                Description = anEvent.Description
+            };
         }
     }
 }
