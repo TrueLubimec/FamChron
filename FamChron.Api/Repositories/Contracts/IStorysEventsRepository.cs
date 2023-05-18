@@ -8,7 +8,7 @@ namespace FamChron.Api.Repositories.Contracts
         Task<Event> RemoveEvent(int id);
         Task<Event> UpdateEvents(Event @event);
         Task<Event> GetEvent(int id);
-        Task<IEnumerable<Event>> GetAllEvents();
+        Task<IEnumerable<Event>> GetAllEvents(int StoryId);
 
     }
 }
