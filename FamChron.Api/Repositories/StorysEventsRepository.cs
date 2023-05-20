@@ -35,24 +35,45 @@ namespace FamChron.Api.Repositories
             return null;
         }
 
-        public Task<IEnumerable<Event>> GetAllEvents()
+        public async Task<IEnumerable<Event>> GetAllEvents(int StoryId)
         {
-            throw new NotImplementedException();
+            return await (from events in famChronDbContext.Events
+                          join Story in this.famChronDbContext.Stories
+                          on events.StoryID equals Story.id
+                          where Story.id == StoryId
+                          select new Event
+                          {
+                              id = events.id,
+                              Name = events.Name,
+                              Date = events.Date,
+                              Description = events.Description,
+                              PreviewPhoto = events.PreviewPhoto,
+                              Photos = events.Photos,
+                              StoryID = events.StoryID
+                          }).ToListAsync();
         }
 
-        public Task<Event> GetEvent(int id)
+        public async Task<Event> GetEvent(int id)
         {
-            throw new NotImplementedException();
+            var anEvent = await this.famChronDbContext.Events.FindAsync(id);
+            return anEvent;
         }
 
-        public Task<Event> RemoveEvent(int id)
+        public async Task<Event> RemoveEvent(int id)
         {
-            throw new NotImplementedException();
+            var item = await this.famChronDbContext.Events.FindAsync(id);
+            if (item != null)
+            {
+                this.famChronDbContext.Events.Remove(item);
+                this.famChronDbContext.SaveChangesAsync();
+            }
+            return item;
         }
 
         public Task<Event> UpdateEvents(Event @event)
         {
             throw new NotImplementedException();
         }
+
     }
 }
