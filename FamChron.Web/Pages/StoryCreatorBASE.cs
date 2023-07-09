@@ -1,6 +1,9 @@
-﻿namespace FamChron.Web.Pages
+﻿using Microsoft.AspNetCore.Components;
+
+namespace FamChron.Web.Pages
 {
-    public class StoryCreatorBASE
+    public class StoryCreatorBASE : ComponentBase
     {
+
     }
 }
