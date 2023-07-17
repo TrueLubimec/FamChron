@@ -1,6 +1,49 @@
 ﻿@page "/storycreator"
 
-<div class="text-center">
+<div class="text-center mb-5">
     <h1>Story creation</h1>
     <h3> So here you can add your story to your digital storage</h3>
+</div>
+
+<div>
+    <div class="col-lg-9 mx-auto rounded border p-3">
+        
+        <form method="post">
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Storie's name</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="storyName">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Storie's name</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="datetime-local" data-val="true"
+                    data-val-required="The DateTime field is required" id="DateTime" name="storyDate">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Description</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="description">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Preview</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="previewPhoto">
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="offset-sm-4" col-sm-8">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
