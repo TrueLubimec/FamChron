@@ -29,7 +29,6 @@ namespace FamChron.Web.Services
                     {
                         return default(Event);
                     }
-
                     return await response.Content.ReadFromJsonAsync<Event>();
                 }
                 else
