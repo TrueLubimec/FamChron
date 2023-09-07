@@ -1,6 +1,6 @@
-﻿using FamChron.Api.Repositories.Contracts;
-using FamChron.Api.Data;
+﻿using FamChron.Api.Data;
 using FamChron.Api.Entities;
+using FamChron.Api.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace FamChron.Api.Repositories
