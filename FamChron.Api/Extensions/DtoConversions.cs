@@ -35,5 +35,14 @@ namespace FamChron.Api.Extensions
                 Description = anEvent.Description
             };
         }
+
+        public static StoryDto ConvertToDto(this Story story)
+        {
+            return new StoryDto
+            {
+                id = story.id,
+                Name = story.Name
+            };
+        }
     }
 }

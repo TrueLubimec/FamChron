@@ -1,13 +1,19 @@
 ﻿using Microsoft.AspNetCore.Components;
 using FamChron.Web.Services.Contracts;
+using FamChron.Models.Dtos;
+
 
 namespace FamChron.Web.Pages
 {
     public class StoryCreatorBASE : ComponentBase
     {
-        public string storyName { get; set; }
-        public string description { get; set; }
-        public string previewIMG { get; set; }
+        private StoryDto story = new StoryDto();
+
+        protected override async Task OnInitializedAsync()
+        {
+            story = await 
+        }
+
 
     }
 }
