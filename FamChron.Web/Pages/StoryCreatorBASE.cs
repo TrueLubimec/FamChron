@@ -14,14 +14,18 @@ namespace FamChron.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            newStory =
-                  new FormStory();
+            newStory = new FormStory();
         }
         public async void Submit()
         {
-            storyService.PostStory()
-            
-        }
+            var storyDto = new StoryDto()
+            {
+                id = newStory.Id,
+                Name = newStory.Name
+            };
+            await storyService.PostStory(storyDto);
 
+            newStory = new FormStory();
+        }
     }
 }
