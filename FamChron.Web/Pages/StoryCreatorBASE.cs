@@ -1,19 +1,27 @@
 ﻿using Microsoft.AspNetCore.Components;
 using FamChron.Web.Services.Contracts;
 using FamChron.Models.Dtos;
-
+using FamChron.Models.UIModels;
+using FamChron.Web.Services;
 
 namespace FamChron.Web.Pages
 {
     public class StoryCreatorBASE : ComponentBase
     {
-        private StoryDto story = new StoryDto();
+        [Inject]
+        IStoryService storyService { get; set; } 
+        public FormStory newStory { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            story = await 
+            newStory =
+                  new FormStory();
         }
-
+        public async void Submit()
+        {
+            storyService.PostStory()
+            
+        }
 
     }
 }

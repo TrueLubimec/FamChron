@@ -1,10 +1,13 @@
 ﻿@page "/storycreator"
 @inherits StoryCreatorBASE
 
-@*<EditForm Model="@" OnValidSubmit="@">
-    <InputText @bind-Value=""/>
+<EditForm Model="@newStory" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary />
 
-</EditForm>*@
+    <InputText Name = "StoryName" @bind-Value="newStory.Name"/>
+    <button type="submit">Let's listen to your new fascitanting story'</button>
+</EditForm>
 <div class="text-center mb-5">
     <h1>Story creation</h1>
     <h3> So here you can add your story to your digital storage</h3>

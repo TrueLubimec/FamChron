@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FamChron.Models.Dtos
 {
-    // Тип трансферный объект (в Api.Extemsions трансформируется) для передачи только необходимых данных
+    // Тип трансферный объект (в Api.Extensions трансформируется) для передачи только необходимых данных
     public class EventDto
     {
         public int Id { get; set; }
