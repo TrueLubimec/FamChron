@@ -8,6 +8,8 @@ namespace FamChron.Web.Pages
 {
     public class StoryCreatorBASE : ComponentBase
     {
+        
+        
         [Inject]
         IStoryService storyService { get; set; } 
         public FormStory newStory { get; set; }

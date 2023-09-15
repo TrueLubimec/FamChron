@@ -1,5 +1,7 @@
 ﻿using FamChron.Api.Entities;
+using FamChron.Api.Extensions;
 using FamChron.Api.Repositories.Contracts;
+using FamChron.Models.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,22 +11,45 @@ namespace FamChron.Api.Controllers
     [ApiController]
     public class StoryController : ControllerBase
     {
-        private readonly IEventRepository storyRepository;
+        private readonly IStoryRepository storyRepository;
 
-        public StoryController(IEventRepository storyRepository)
+        public StoryController(IStoryRepository storyRepository)
         {
             this.storyRepository = storyRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Story>>> GetStory()
+        public async Task<ActionResult<IEnumerable<Story>>> GetStories()
         {
             try
             {
-                var story = await this.storyRepository.GetStories();
-                if(story == null)
+                var stories = await this.storyRepository.GetStories();
+                if (story == null)
                 {
                     return NotFound();
+                }
+                else
+                {
+                    return Ok(stories);
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                    "Pizdec ne robit (((");
+
+            }
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Story>> GetStory(int id)
+        {
+            try
+            {
+                var story = await this.storyRepository.GetStory(id);
+                if (story == null)
+                {
+                    return null;
                 }
                 else
                 {
@@ -34,8 +59,26 @@ namespace FamChron.Api.Controllers
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                                    "Pizdec ne robit (((");
-                
+                                    "Oshibsya");
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Story>> PostStory([FromBody] StoryDto @story)
+        {
+            try
+            {
+                var newStory = await this.storyRepository.PostStory(@story);
+                if (newStory == null)
+                {
+                    return NoContent();
+                }
+                var newStoryDto = newStory.ConvertToDto(story);
+                return CreatedAtAction(nameof(GetStory), newStory);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }

@@ -16,6 +16,7 @@ builder.Services.AddDbContextPool<FamChronDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FamChronConnection")));
 
 builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IStoryRepository, StoryRepository>();
 builder.Services.AddScoped<IStorysEventsRepository, StorysEventsRepository>();
 
 var app = builder.Build();
