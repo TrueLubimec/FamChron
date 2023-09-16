@@ -2,7 +2,6 @@
 using FamChron.Api.Extensions;
 using FamChron.Api.Repositories.Contracts;
 using FamChron.Models.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamChron.Api.Controllers
