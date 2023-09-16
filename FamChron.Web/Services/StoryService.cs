@@ -12,6 +12,31 @@ namespace FamChron.Web.Services
         {
             this.httpClient = httpClient;
         }
+        //public async Task<IEnumerable<StoryDto>> GetStories(int userId)
+        //{
+        //    try
+        //    {
+        //        var response = await httpClient.GetAsync($"api/Story/{userId}");
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+        //            {
+        //                return default(IEnumerable<StoryDto>);
+        //            }
+        //            return await response.Content.ReadFromJsonAsync<StoryDto>();
+        //        }
+        //        else
+        //        {
+        //            var message = response.Content.ReadAsStringAsync();
+        //            throw new Exception(message.ToString());
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        //Log
+        //        throw;
+        //    }
+        //}
         public async Task<StoryDto> GetStory(int storyId)
         {
             try

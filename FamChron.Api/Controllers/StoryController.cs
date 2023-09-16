@@ -19,12 +19,13 @@ namespace FamChron.Api.Controllers
         }
 
         [HttpGet]
+        [Route("{userId}/GerStories")]
         public async Task<ActionResult<IEnumerable<Story>>> GetStories()
         {
             try
             {
                 var stories = await this.storyRepository.GetStories();
-                if (story == null)
+                if (stories == null)
                 {
                     return NotFound();
                 }
@@ -73,7 +74,7 @@ namespace FamChron.Api.Controllers
                 {
                     return NoContent();
                 }
-                var newStoryDto = newStory.ConvertToDto(story);
+                var newStoryDto = newStory.ConvertToDto();
                 return CreatedAtAction(nameof(GetStory), newStory);
             }
             catch(Exception ex)
