@@ -35,19 +35,16 @@ namespace FamChron.Api.Repositories
 
         public async Task<Story> PostStory(StoryDto @story)
         {
-            if (await StoryExist(@story.id))
+            var item = new Story
             {
-                var item = new Story
-                {
-                    id = story.id,
-                    Name = story.Name
-                };
-                if (@story != null)
-                {
-                    var result = await this.famChronDbContext.Stories.AddAsync(item);
-                    await this.famChronDbContext.SaveChangesAsync();
-                    return result.Entity;
-                }
+                id = story.id,
+                Name = story.Name
+            };
+            if (@story != null)
+            {
+                var result = await this.famChronDbContext.Stories.AddAsync(item);
+                await this.famChronDbContext.SaveChangesAsync();
+                return result.Entity;
             }
             return null;
         }

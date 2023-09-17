@@ -73,8 +73,16 @@ namespace FamChron.Api.Controllers
                 {
                     return NoContent();
                 }
+
+                var aStory = await storyRepository.GetStory(newStory.id);
+
+                if (aStory == null)
+                {
+                    throw new Exception($"Something went wrong when attempting to retrieve product (productId:({newStory.id})");
+                }
+
                 var newStoryDto = newStory.ConvertToDto();
-                return CreatedAtAction(nameof(GetStory), newStory);
+                return CreatedAtAction(nameof(GetStory),new {id = newStoryDto.id}, newStoryDto);
             }
             catch(Exception ex)
             {
