@@ -1,13 +1,7 @@
 ﻿@page "/storycreator"
 @inherits StoryCreatorBASE
 
-<EditForm Model="@newStory" OnValidSubmit="@Submit">
-    <DataAnnotationsValidator/>
-    <ValidationSummary />
 
-    <InputText Name = "StoryName" @bind-Value="newStory.Name"/>
-    <button type="submit">Let's listen to your new fascitanting story'</button>
-</EditForm>
 
 
 <div class="text-center mb-5">
@@ -19,41 +13,16 @@
     <div class="col-lg-9 mx-auto rounded border p-3">
         
         <form method="post">
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Storie's name</label>
-                <div class="col-sm-8">
-                    <input class="form-control" name="storyName">
+            <EditForm Model="@newStory" OnValidSubmit="@Submit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="row mb-3">
+                    <InputText Name="StoryName" @bind-Value="newStory.Name" />
+                    <a href="/@newStory.Id/events">
+                    <button type="submit">Let's listen to your new fascitanting story</button>
+                </a>
                 </div>
-            </div>
-
-@*            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Storie's name</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="datetime-local" data-val="true"
-                    data-val-required="The DateTime field is required" id="DateTime" name="storyDate">
-                </div>
-            </div>*@
-
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Description</label>
-                <div class="col-sm-8">
-                    <input class="form-control" name="description">
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">Preview</label>
-                <div class="col-sm-8">
-                    <input class="form-control" name="previewPhoto">
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="offset-sm-4" col-sm-8">
-                    <button type="submit" class="btn btn-primary">Add</button>
-                </div>
-            </div>
+            </EditForm>
         </form>
     </div>
 </div>

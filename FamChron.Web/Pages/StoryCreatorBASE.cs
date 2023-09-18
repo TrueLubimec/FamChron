@@ -11,6 +11,9 @@ namespace FamChron.Web.Pages
         [Inject]
         IStoryService storyService { get; set; } 
         public FormStory newStory { get; set; }
+        public int storyId { get; set; }
+        [Inject]
+        public NavigationManager navigationManager { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -23,7 +26,7 @@ namespace FamChron.Web.Pages
                 id = newStory.Id,
                 Name = newStory.Name
             };
-            await storyService.PostStory(storyDto);
+            await storyService.PostStory(storyDto);            
 
             newStory = new FormStory();
         }
