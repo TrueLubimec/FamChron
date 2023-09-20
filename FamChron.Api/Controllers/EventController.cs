@@ -16,12 +16,12 @@ namespace FamChron.Api.Controllers
             this.eventRepository = eventRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<EventDto>>> GetEvents() 
+        [HttpGet("{storyId:int}")]
+        public async Task<ActionResult<IEnumerable<EventDto>>> GetEvents(int storyId) 
         {
             try
             {
-                var events = await this.eventRepository.GetEvents();
+                var events = await this.eventRepository.GetEvents(storyId);
                 var story = await this.eventRepository.GetStories();
 
                 if (events == null || story == null) 

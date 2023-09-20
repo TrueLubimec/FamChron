@@ -2,7 +2,6 @@
 using FamChron.Web.Services.Contracts;
 using FamChron.Models.Dtos;
 using FamChron.Models.UIModels;
-using FamChron.Web.Services;
 
 namespace FamChron.Web.Pages
 {
@@ -26,7 +25,9 @@ namespace FamChron.Web.Pages
                 id = newStory.Id,
                 Name = newStory.Name
             };
-            await storyService.PostStory(storyDto);            
+            // Надо потом подрихтовать
+            var result = await storyService.PostStory(storyDto);
+            navigationManager.NavigateTo($"/{result.id}/events");
 
             newStory = new FormStory();
         }

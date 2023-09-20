@@ -19,9 +19,9 @@ namespace FamChron.Api.Repositories
             return anEvent;
         }
 
-        public async Task<IEnumerable<Event>> GetEvents()
+        public async Task<IEnumerable<Event>> GetEvents(int storyId)
         {
-            var events = await this.famChronDbContext.Events.ToListAsync();
+            var events = await this.famChronDbContext.Events.Where(a => EF.Property<int?>(a, "StoryId") == storyId).ToListAsync();
             return events;
         }
 

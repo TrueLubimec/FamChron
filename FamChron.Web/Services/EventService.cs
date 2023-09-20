@@ -39,7 +39,7 @@ namespace FamChron.Web.Services
             }
         }
 
-        public async Task<IEnumerable<EventDto>> GetEvents()
+        public async Task<IEnumerable<EventDto>> GetEvents(int storyId)
         {
             try
             {

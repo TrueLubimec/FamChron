@@ -6,6 +6,9 @@ namespace FamChron.Web.Pages
 {
     public class EventsBase : ComponentBase
     {
+        [Parameter]
+        public int storyId { get; set; }
+
         [Inject]
         public IEventService eventService { get; set; }
         
@@ -13,7 +16,7 @@ namespace FamChron.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            events = await eventService.GetEvents();
+            events = await eventService.GetEvents(storyId);
         }
     }
 }
