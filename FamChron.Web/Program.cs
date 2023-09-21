@@ -1,4 +1,6 @@
+global using Microsoft.AspNetCore.Components.Authorization;
 using FamChron.Web;
+using FamChron.Web.Authentication;
 using FamChron.Web.Pages;
 using FamChron.Web.Services;
 using FamChron.Web.Services.Contracts;
@@ -13,6 +15,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https:/
 
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IStoryService, StoryService>();
+builder.Services.AddScoped<AuthenticationStateProvider, UserAuthStateProvider>();
 
 await builder.Build().RunAsync();
 // 7047
