@@ -44,5 +44,15 @@ namespace FamChron.Api.Extensions
                 Name = story.Name
             };
         }
+
+        public static UserDto ConvertToDto(this User user)
+        {
+            return new UserDto
+            {
+                UserId = user.id,
+                Name = user.UserName,
+                Password = user.PasswordHash
+            };
+        }
     }
 }

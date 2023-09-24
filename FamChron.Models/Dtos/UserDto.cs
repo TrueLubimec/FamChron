@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace FamChron.Models.Dtos
 {
-    internal class CharacterDto
+    public class UserDto
     {
-        public int CharacterId { get; set; }
+        public int UserId { get; set; }
         public string Name { get; set; }
+        public string Password { get; set; }
     }
 }

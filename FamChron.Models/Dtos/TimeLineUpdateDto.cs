@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FamChron.Models.Dtos
 {
-    internal class TimeLineUpdateDto
+    public class TimeLineUpdateDto
     {
         public int TimeLineId { get; set; }
         public int EventId { get; set; }
