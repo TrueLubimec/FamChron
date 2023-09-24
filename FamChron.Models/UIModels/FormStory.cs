@@ -8,7 +8,7 @@ namespace FamChron.Models.UIModels
 
         [Required]
         [StringLength(30, ErrorMessage = "Story's name is too long!")]
-        [MinLength(0, ErrorMessage = "Story's name is too short!")]
+        [MinLength(1, ErrorMessage = "Story's name is too short!")]
         public string Name { get; set; }
     }
 }
