@@ -22,5 +22,20 @@ namespace FamChron.Api.Controllers
 
             return Ok(user);
         }
+
+        [HttpPost("login")]
+        public ActionResult<User> Login(UserDto userDtoRequest)
+        {
+            if (user.UserName != userDtoRequest.Name)
+            {
+                return BadRequest("User not found.");
+            }
+            if (!BCrypt.Net.BCrypt.Verify(userDtoRequest.Password, user.PasswordHash))
+            {
+                return BadRequest("Wrong password.");
+            }
+
+            return Ok(user);
+        }
     }
 }
