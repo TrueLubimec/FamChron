@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FamChron.Models.UIModels
 {
-    internal class FormUser
+    public class FormUser
     {
         public int UserId { get; set; }
         [Required]

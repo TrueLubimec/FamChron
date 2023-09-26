@@ -4,6 +4,7 @@ using System.Net.Http.Json;
 
 namespace FamChron.Web.Services
 {
+    // ЛУЧШЕ ИЗБАВИТЬСЯ ОТ ЭТОГО))))))) !!!!!!!!!!!!!
     public class StorysEventClass : IStorysEventService
     {
         private readonly HttpClient httpClient;

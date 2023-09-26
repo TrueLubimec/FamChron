@@ -1,4 +1,5 @@
 global using Microsoft.AspNetCore.Components.Authorization;
+global using Blazored.LocalStorage;
 using FamChron.Web;
 using FamChron.Web.Authentication;
 using FamChron.Web.Pages;
@@ -17,6 +18,8 @@ builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IStoryService, StoryService>();
 builder.Services.AddScoped<AuthenticationStateProvider, UserAuthStateProvider>();
 builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddBlazoredLocalStorage();
 
 await builder.Build().RunAsync();
 // 7047

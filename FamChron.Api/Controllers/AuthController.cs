@@ -1,5 +1,6 @@
 ﻿using FamChron.Api.Entities;
 using FamChron.Models.Dtos;
+using FamChron.Models.UIModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace FamChron.Api.Controllers
 {
-    [Route("api/auth/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {

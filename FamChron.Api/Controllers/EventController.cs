@@ -16,7 +16,7 @@ namespace FamChron.Api.Controllers
             this.eventRepository = eventRepository;
         }
 
-        [HttpGet("{storyId:int}")]
+        [HttpGet("story{storyId:int}")]
         public async Task<ActionResult<IEnumerable<EventDto>>> GetEvents(int storyId) 
         {
             try

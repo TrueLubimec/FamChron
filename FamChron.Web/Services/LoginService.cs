@@ -1,30 +1,34 @@
 ﻿using FamChron.Models.Dtos;
+using FamChron.Models.UIModels;
 using FamChron.Web.Services.Contracts;
+using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Json;
 
 namespace FamChron.Web.Services
 {
-    public class EventService : IEventService
+    public class LoginService : ILoginService
     {
         private readonly HttpClient httpClient;
 
-        public EventService(HttpClient httpClient)
+        public LoginService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
         }
-
-        public async Task<EventDto> GetEvent(int id)
+        //LATER !!!!!!!!
+        public async Task<ActionResult<FormUser>> Login(UserDto user)
         {
             try
             {
-                var response = await httpClient.GetAsync($"api/Event/{id}");
+                var response = await this.httpClient.PostAsJsonAsync<UserDto>($"api/auth/login", user);
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return default(EventDto);
+                        // Чёт не то !!!!!!!!!!!!!!!!!!!!!
+                        return null;
                     }
-                    return await response.Content.ReadFromJsonAsync<EventDto>();
+                    var token = response.Content.ReadAsStringAsync();
+                    return await response.Content.ReadFromJsonAsync<FormUser>();
                 }
                 else
                 {
@@ -34,25 +38,24 @@ namespace FamChron.Web.Services
             }
             catch (Exception)
             {
-                //Log
                 throw;
             }
+
         }
 
-        // WORKING ON IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        public async Task<IEnumerable<EventDto>> GetEvents(int storyId)
+        public async Task<ActionResult<FormUser>> Register(UserDto user)
         {
             try
             {
-                var response = await this.httpClient.GetAsync($"api/Event/story{storyId}");
-                
+                var response = await this.httpClient.PostAsJsonAsync<UserDto>($"api/auth/register", user);
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return Enumerable.Empty<EventDto>();
+                        // Чёт не то !!!!!!!!!!!!!!!!!!!!!
+                        return null;
                     }
-                    return await response.Content.ReadFromJsonAsync<IEnumerable<EventDto>>();
+                    return await response.Content.ReadFromJsonAsync<FormUser>();
                 }
                 else
                 {
@@ -62,7 +65,6 @@ namespace FamChron.Web.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
