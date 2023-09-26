@@ -1,5 +1,6 @@
 ﻿using FamChron.Models.Dtos;
 using FamChron.Models.UIModels;
+using FamChron.Web.Authentication;
 using FamChron.Web.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Json;
@@ -9,7 +10,8 @@ namespace FamChron.Web.Services
     public class LoginService : ILoginService
     {
         private readonly HttpClient httpClient;
-
+        private ILocalStorageService localStorageService;
+        private UserAuthStateProvider userAuthStateProvider;
         public LoginService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
@@ -27,8 +29,11 @@ namespace FamChron.Web.Services
                         // Чёт не то !!!!!!!!!!!!!!!!!!!!!
                         return null;
                     }
-                    var token = response.Content.ReadAsStringAsync();
+                    var token = await response.Content.ReadAsStringAsync();
+                    await localStorageService.SetItemAsync("token", token);
+                    await userAuthStateProvider.GetAuthenticationStateAsync();
                     return await response.Content.ReadFromJsonAsync<FormUser>();
+
                 }
                 else
                 {

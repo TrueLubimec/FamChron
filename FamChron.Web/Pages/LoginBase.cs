@@ -11,11 +11,9 @@ namespace FamChron.Web.Pages
         [Inject]
         ILoginService loginService { get; set; }
         public FormUser formUser {get; set;}
-
-        private ILocalStorageService localStorageService;
-
         [Inject]
         public NavigationManager navigationManager { get; set; }
+
 
         protected override async Task OnInitializedAsync()
         {

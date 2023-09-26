@@ -5,12 +5,22 @@ namespace FamChron.Web.Authentication
 {
     public class UserAuthStateProvider : AuthenticationStateProvider
     {
+        private readonly ILocalStorageService _localStorageService;
+
+        public UserAuthStateProvider(ILocalStorageService localStorageService)
+        {
+            _localStorageService = localStorageService;
+        }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var token = "";
-            
-            var userIdentity = new ClaimsIdentity(ParseClaimsFromJwt(token), "jwt");
+            var token = await _localStorageService.GetItemAsStringAsync("token");
 
+            var userIdentity = new ClaimsIdentity();
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                userIdentity = new ClaimsIdentity(ParseClaimsFromJwt(token), "jwt");
+            }
 
             var user = new ClaimsPrincipal(userIdentity);
             var state = new AuthenticationState(user);
