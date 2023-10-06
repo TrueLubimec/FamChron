@@ -23,7 +23,7 @@ namespace FamChron.Api.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult<User> Register (UserDto userDtoRequest)
+        public ActionResult<User> Register (RegistrationUserDto userDtoRequest)
         {
             string passwordHash
                 = BCrypt.Net.BCrypt.HashPassword(userDtoRequest.Password);
