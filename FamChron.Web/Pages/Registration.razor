@@ -1,15 +1,15 @@
 ﻿@page "/registration"
-@inherits LoginBase
+@inherits RegistraionBASE
 
 <h3>Registration</h3>
 
 
-<EditForm Model="formUser" OnValidSubmit="Login">
+<EditForm Model="registrationUser" OnValidSubmit="Registration">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="row mb-3">
-        <InputText Name="Username" @bind-Value="formUser.Name" />
-        <InputText Password="Password" @bind-Value="formUser.Password" />
+        <InputText Name="Username" @bind-Value="registrationUser.Name" />
+        <InputText Password="Password" @bind-Value="registrationUser.Password" />
         <button type="submit">Let's move forward</button>
     </div>
 </EditForm>

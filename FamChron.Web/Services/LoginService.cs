@@ -48,11 +48,11 @@ namespace FamChron.Web.Services
 
         }
 
-        public async Task<ActionResult<FormUser>> Register(UserDto user)
+        public async Task<ActionResult<FormUser>> Register(RegistrationUserDto user)
         {
             try
             {
-                var response = await this.httpClient.PostAsJsonAsync<UserDto>($"api/auth/register", user);
+                var response = await httpClient.PostAsJsonAsync($"api/auth/register", user);
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
@@ -60,6 +60,7 @@ namespace FamChron.Web.Services
                         // Чёт не то !!!!!!!!!!!!!!!!!!!!!
                         return null;
                     }
+                    // Тут ЗАПУТАЛСЯ немного...
                     return await response.Content.ReadFromJsonAsync<FormUser>();
                 }
                 else

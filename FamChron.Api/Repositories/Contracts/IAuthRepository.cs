@@ -9,6 +9,6 @@ namespace FamChron.Api.Repositories.Contracts
     {
         Task<ActionResult<User>> Login(User user);
 
-        Task Regitration(RegistrationUserDto user);
+        Task<User> Regitration(RegistrationUserDto user);
     }
 }

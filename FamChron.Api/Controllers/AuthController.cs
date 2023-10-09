@@ -1,4 +1,5 @@
 ﻿using FamChron.Api.Entities;
+using FamChron.Api.Repositories.Contracts;
 using FamChron.Models.Dtos;
 using FamChron.Models.UIModels;
 using Microsoft.AspNetCore.Http;
@@ -16,22 +17,31 @@ namespace FamChron.Api.Controllers
     {
         public static User user = new User();
         private readonly IConfiguration _configuration;
+        private readonly IAuthRepository authRepository;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IConfiguration configuration, IAuthRepository authRepository)
         {
             _configuration = configuration;
+            this.authRepository = authRepository;
         }
 
-        [HttpPost("register")]
-        public ActionResult<User> Register (RegistrationUserDto userDtoRequest)
+        [HttpPost]
+        public ActionResult<User> Register ([FromBody]RegistrationUserDto userDtoRequest)
         {
-            string passwordHash
-                = BCrypt.Net.BCrypt.HashPassword(userDtoRequest.Password);
+            try
+            {
+                var newUser = this.authRepository.Regitration(userDtoRequest);
+                if (newUser == null)
+                {
+                    return NoContent();
+                }
+                return Ok(newUser);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
 
-            user.UserName = userDtoRequest.Name;
-            user.PasswordHash = passwordHash;
-
-            return Ok(user);
         }
 
         [HttpPost("login")]

@@ -17,11 +17,27 @@ namespace FamChron.Api.Repositories
         public Task<ActionResult<User>> Login(User user)
         {
             var result = famChronDbContext.Users.FindAsync(user.id);
+            
         }
 
-        public Task Regitration(RegistrationUserDto user)
+        public async Task<User> Regitration(RegistrationUserDto @user)
         {
-            throw new NotImplementedException();
+            string passwordHash
+                 = BCrypt.Net.BCrypt.HashPassword(@user.Password);
+            var newUser = new User
+            {
+                id = @user.Id,
+                UserName = @user.Name,
+                PasswordHash = passwordHash
+            };
+
+            if (@user != null)
+            {
+                var result = await this.famChronDbContext.Users.AddAsync(newUser);
+                await this.famChronDbContext.SaveChangesAsync();
+                return result.Entity;
+            }
+            return null;
         }
     }
 }

@@ -9,6 +9,8 @@ namespace FamChron.Models.Dtos
 {
     public class RegistrationUserDto
     {
+        public int Id { get; set; }
+
         [Display(Name = "Your name")]
         [Required]
         [StringLength(30, ErrorMessage = "Name is too long")]
