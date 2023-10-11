@@ -28,16 +28,17 @@ namespace FamChron.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<User> Register ([FromBody]RegistrationUserDto userDtoRequest)
+        public async Task<ActionResult<User>> Register ([FromBody]RegistrationUserDto userDtoRequest)
         {
             try
             {
-                var newUser = this.authRepository.Regitration(userDtoRequest);
+                var newUser = await this.authRepository.Regitration(userDtoRequest);
                 if (newUser == null)
                 {
                     return NoContent();
                 }
-                return CreatedAtAction(nameof(userRepository.GetUser), new { id = newUser.Id }, newUser);
+                return Ok(newUser);
+                // return CreatedAtAction(nameof(userRepository.GetUser), new { id = newUser.Id }, newUser);
             }
             catch(Exception ex)
             {
@@ -47,7 +48,7 @@ namespace FamChron.Api.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult<User> Login(UserDto userDtoRequest)
+        public async Task<ActionResult<User>> Login(UserDto userDtoRequest)
         {
             // лучше сделать один тест или одинаковые сообщения, чтобы сложнее ломануть
             if (user.UserName != userDtoRequest.Name)

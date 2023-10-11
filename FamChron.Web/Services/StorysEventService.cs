@@ -5,11 +5,11 @@ using System.Net.Http.Json;
 namespace FamChron.Web.Services
 {
     // ЛУЧШЕ ИЗБАВИТЬСЯ ОТ ЭТОГО))))))) !!!!!!!!!!!!!
-    public class StorysEventClass : IStorysEventService
+    public class StorysEventService : IStorysEventService
     {
         private readonly HttpClient httpClient;
 
-        public StorysEventClass(HttpClient httpClient)
+        public StorysEventService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
         }
@@ -22,7 +22,7 @@ namespace FamChron.Web.Services
         {
             try
             {
-                var response = await httpClient.PostAsJsonAsync<Event>("api/StorysEvent", @event);
+                var response = await httpClient.PostAsJsonAsync("api/StorysEvent", @event);
 
                 if (response.IsSuccessStatusCode)
                 {

@@ -52,7 +52,7 @@ namespace FamChron.Web.Services
         {
             try
             {
-                var response = await httpClient.PostAsJsonAsync($"api/auth/register", user);
+                var response = await httpClient.PostAsJsonAsync($"api/Auth", user);
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
