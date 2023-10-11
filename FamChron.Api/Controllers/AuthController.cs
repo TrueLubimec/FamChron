@@ -18,11 +18,13 @@ namespace FamChron.Api.Controllers
         public static User user = new User();
         private readonly IConfiguration _configuration;
         private readonly IAuthRepository authRepository;
+        private readonly IUserRepository userRepository;
 
-        public AuthController(IConfiguration configuration, IAuthRepository authRepository)
+        public AuthController(IConfiguration configuration, IAuthRepository authRepository, IUserRepository userRepository)
         {
             _configuration = configuration;
             this.authRepository = authRepository;
+            this.userRepository = userRepository;
         }
 
         [HttpPost]
@@ -35,7 +37,7 @@ namespace FamChron.Api.Controllers
                 {
                     return NoContent();
                 }
-                return Ok(newUser);
+                return CreatedAtAction(nameof(userRepository.GetUser), new { id = newUser.Id }, newUser);
             }
             catch(Exception ex)
             {
