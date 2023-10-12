@@ -1,4 +1,5 @@
 ﻿using FamChron.Models.Dtos;
+using FamChron.Web.Pages;
 
 namespace FamChron.Web.Services.Contracts
 {
@@ -6,5 +7,6 @@ namespace FamChron.Web.Services.Contracts
     {
         Task<IEnumerable<EventDto>> GetEvents(int storyId);
         Task<EventDto> GetEvent(int id);
+        Task<Event> PostEvent(Event @event);
     }
 }

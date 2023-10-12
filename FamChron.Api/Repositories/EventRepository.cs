@@ -13,28 +13,64 @@ namespace FamChron.Api.Repositories
         {
             this.famChronDbContext = famChronDbContext;
         }
+        private async Task<bool> EventExists(int eventId, int storyId)
+        {
+            return await this.famChronDbContext.Events.AnyAsync(c => c.id == eventId &&
+                                                                c.StoryID == storyId);
+
+        }
+        public async Task<Event> AddEvent(Event @event)
+        {
+            if (await EventExists(@event.id, @event.StoryID) == false)
+            {
+                if (@event != null)
+                {
+                    var result = await this.famChronDbContext.Events.AddAsync(@event);
+                    await this.famChronDbContext.SaveChangesAsync();
+                    return result.Entity;
+                }
+            }
+            return null;
+        }
+
         public async Task<Event> GetEvent(int id)
         {
             var anEvent = await this.famChronDbContext.Events.FindAsync(id);
             return anEvent;
         }
 
-        public async Task<IEnumerable<Event>> GetEvents(int storyId)
+        public async Task<IEnumerable<Event>> GetEvents(int StoryId)
         {
-            var events = await this.famChronDbContext.Events.Where(a => EF.Property<int?>(a, "StoryId") == storyId).ToListAsync();
-            return events;
+            return await (from events in famChronDbContext.Events
+                          join Story in this.famChronDbContext.Stories
+                          on events.StoryID equals Story.id
+                          where Story.id == StoryId
+                          select new Event
+                          {
+                              id = events.id,
+                              Name = events.Name,
+                              Date = events.Date,
+                              Description = events.Description,
+                              PreviewPhoto = events.PreviewPhoto,
+                              Photos = events.Photos,
+                              StoryID = events.StoryID
+                          }).ToListAsync();
         }
 
-        public async Task<IEnumerable<Story>> GetStories()
+        public async Task<Event> RemoveEvent(int id)
         {
-            var stories = await this.famChronDbContext.Stories.ToArrayAsync();
-            return stories;
+            var item = await this.famChronDbContext.Events.FindAsync(id);
+            if (item != null)
+            {
+                this.famChronDbContext.Events.Remove(item);
+                this.famChronDbContext.SaveChangesAsync();
+            }
+            return item;
         }
 
-        public async Task<Story> GetStory(int id)
+        public Task<Event> UpdateEvents(Event @event)
         {
-            var story = await famChronDbContext.Stories.SingleOrDefaultAsync(a => a.id == id);
-            return story;
+            throw new NotImplementedException();
         }
     }
 }

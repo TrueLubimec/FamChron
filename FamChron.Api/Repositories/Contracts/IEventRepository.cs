@@ -5,8 +5,9 @@ namespace FamChron.Api.Repositories.Contracts
     public interface IEventRepository
     {
         Task<IEnumerable<Event>> GetEvents(int storyId);
-        Task<IEnumerable<Story>> GetStories();
         Task<Event> GetEvent(int id);
-        Task<Story> GetStory(int id);
+        Task<Event> AddEvent(Event @event);
+        Task<Event> RemoveEvent(int id);
+        Task<Event> UpdateEvents(Event @event);
     }
 }

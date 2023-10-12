@@ -1,4 +1,5 @@
 ﻿using FamChron.Models.Dtos;
+using FamChron.Web.Pages;
 using FamChron.Web.Services.Contracts;
 using System.Net.Http.Json;
 
@@ -58,6 +59,34 @@ namespace FamChron.Web.Services
                 {
                     var message = response.Content.ReadAsStringAsync();
                     throw new Exception(message.ToString());
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public async Task<Event> PostEvent(Event @event)
+        {
+            try
+            {
+                var response = await httpClient.PostAsJsonAsync("api/StorysEvent", @event);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        return default(Event);
+                    }
+                    return await response.Content.ReadFromJsonAsync<Event>();
+                }
+                else
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Http status:{response.StatusCode} Message -{message}");
                 }
             }
             catch (Exception)

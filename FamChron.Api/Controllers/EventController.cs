@@ -1,4 +1,5 @@
-﻿using FamChron.Api.Extensions;
+﻿using FamChron.Api.Entities;
+using FamChron.Api.Extensions;
 using FamChron.Api.Repositories.Contracts;
 using FamChron.Models.Dtos;
 using Microsoft.AspNetCore.Http;
@@ -11,34 +12,37 @@ namespace FamChron.Api.Controllers
     public class EventController : ControllerBase
     {
         private readonly IEventRepository eventRepository;
-        public EventController(IEventRepository eventRepository)
+        private readonly IStoryRepository storyRepository;
+
+        public EventController(IEventRepository eventRepository, IStoryRepository storyRepository)
         {
             this.eventRepository = eventRepository;
+            this.storyRepository = storyRepository;
         }
 
         [HttpGet("story{storyId:int}")]
-        public async Task<ActionResult<IEnumerable<EventDto>>> GetEvents(int storyId) 
+        public async Task<ActionResult<IEnumerable<EventDto>>> GetEvents(int storyId)
         {
             try
             {
                 var events = await this.eventRepository.GetEvents(storyId);
-                var story = await this.eventRepository.GetStories();
+                var story = await this.storyRepository.GetStories();
 
-                if (events == null || story == null) 
+                if (events == null || story == null)
                 {
-                    return NotFound(); 
+                    return NotFound();
                 }
-                else 
+                else
                 {
                     var eventDtos = events.ConvertToDto(story);
-                    return Ok(eventDtos); 
+                    return Ok(eventDtos);
                 }
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                             "PIZDEC SNOVA NE BACHIT");
-                
+
             }
         }
 
@@ -51,11 +55,11 @@ namespace FamChron.Api.Controllers
 
                 if (anEvent == null)
                 {
-                    return BadRequest();
+                    return NoContent();
                 }
                 else
                 {
-                    var story = await this.eventRepository.GetStory(anEvent.StoryID);
+                    var story = await this.storyRepository.GetStory(anEvent.StoryID);
 
                     var eventDto = anEvent.ConvertToDto(story);
 
@@ -66,7 +70,24 @@ namespace FamChron.Api.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                             "PIZDEC SNOVA NE BACHIT");
+            }
+        }
 
+        [HttpPost]
+        public async Task<ActionResult<Event>> PostEvent([FromBody] Event @event)
+        {
+            try
+            {
+                var newEvent = await this.eventRepository.AddEvent(@event);
+                if (newEvent == null)
+                {
+                    return NoContent();
+                }
+                return CreatedAtAction(nameof(GetEvent), new { id = newEvent.id }, newEvent);
+            }
+            catch (Exception except)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, except.Message);
             }
         }
     }
