@@ -10,11 +10,14 @@ namespace FamChron.Models.UIModels
     public class FormUser
     {
         public int UserId { get; set; }
+
+        [Display(Name = "your nickname")]
         [Required]
         [StringLength(30, ErrorMessage ="Name is too long")]
         [MinLength(1, ErrorMessage ="Invalid name")]
         public string Name { get; set; }
 
+        [Display(Name = "password")]
         [Required]
         public string Password { get; set; }
     }
