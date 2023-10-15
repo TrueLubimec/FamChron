@@ -9,7 +9,9 @@
     <ValidationSummary />
     <div class="row mb-3">
         <InputText Name="Username" @bind-Value="registrationUser.Name" />
+        <InputText Email =" E-mail" @bind-Value="registrationUser.Email" />
         <InputText Password="Password" @bind-Value="registrationUser.Password" />
+        <InputText Confirm Password ="Confirm password" @bind-Value="registrationUser.ConfirmPassword" />
         <button type="submit">Let's move forward</button>
     </div>
 </EditForm>
