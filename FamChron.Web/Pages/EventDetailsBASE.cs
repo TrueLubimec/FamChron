@@ -1,4 +1,5 @@
 ﻿using FamChron.Models.Dtos;
+using FamChron.Web.Authentication;
 using FamChron.Web.Services.Contracts;
 using Microsoft.AspNetCore.Components;
 
@@ -21,6 +22,7 @@ namespace FamChron.Web.Pages
         {
             try
             {
+                
                 anEvent = await eventService.GetEvent(id);
             }
             catch (Exception except)

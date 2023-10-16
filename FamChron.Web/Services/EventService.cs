@@ -69,7 +69,7 @@ namespace FamChron.Web.Services
         }
 
 
-        public async Task<Event> PostEvent(Event @event)
+        public async Task<EventDto> PostEvent(EventDto @event)
         {
             try
             {
@@ -79,9 +79,9 @@ namespace FamChron.Web.Services
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return default(Event);
+                        return default(EventDto);
                     }
-                    return await response.Content.ReadFromJsonAsync<Event>();
+                    return await response.Content.ReadFromJsonAsync<EventDto>();
                 }
                 else
                 {

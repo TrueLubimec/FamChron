@@ -31,6 +31,7 @@ namespace FamChron.Web.Services
                     }
                     var token = await response.Content.ReadAsStringAsync();
                     await localStorageService.SetItemAsync("token", token);
+                    
                     await userAuthStateProvider.GetAuthenticationStateAsync();
                     return await response.Content.ReadFromJsonAsync<FormUser>();
 
