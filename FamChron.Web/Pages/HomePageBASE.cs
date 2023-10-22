@@ -8,7 +8,6 @@ namespace FamChron.Web.Pages
 {
     public class HomePageBASE : ComponentBase
     {
-        [Parameter]
         public int id { get; set; }
         
         [Inject]
@@ -17,7 +16,7 @@ namespace FamChron.Web.Pages
         [CascadingParameter]
         private Task<AuthenticationState> authenticationState { get; set; }
 
-        [Inject]
+        //[Inject]
         UserManager<FormUser> userManager { get; set; }
 
         protected override async Task OnInitializedAsync()

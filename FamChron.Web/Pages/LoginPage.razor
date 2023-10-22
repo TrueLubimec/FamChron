@@ -7,7 +7,9 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="row mb-3">
+        <label for="Username">Username:</label>
         <InputText Name="Username" @bind-Value="formUser.Name" />
+        <label for="Password">Password:</label>
         <InputText Password="Password" @bind-Value="formUser.Password" />
         <button type="submit">Let's move forward</button>
     </div>

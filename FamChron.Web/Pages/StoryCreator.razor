@@ -9,18 +9,22 @@
     <h3> So here you can add your story to your digital storage</h3>
 </div>
 
-<div>
-    <div class="col-lg-9 mx-auto rounded border p-3">
+<AuthorizeView>
+    <Authorized>
+        <div>
+            <div class="col-lg-9 mx-auto rounded border p-3">
         
-        <form method="post">
-            <EditForm Model="@newStory" OnValidSubmit="@Submit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div class="row mb-3">
-                    <InputText Name="StoryName" @bind-Value="newStory.Name" />
-                    <button type="submit">Let's listen to your new fascitanting story</button>
-                </div>
-            </EditForm>
-        </form>
-    </div>
-</div>
+                <form method="post">
+                    <EditForm Model="@newStory" OnValidSubmit="@Submit">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div class="row mb-3">
+                            <InputText Name="StoryName" @bind-Value="newStory.Name" />
+                            <button type="submit">Let's listen to your new fascitanting story</button>
+                        </div>
+                    </EditForm>
+                </form>
+            </div>
+        </div>
+    </Authorized>
+</AuthorizeView>

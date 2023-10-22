@@ -1,7 +1,9 @@
 ﻿using FamChron.Models.Dtos;
 using FamChron.Models.UIModels;
+using FamChron.Web.Authentication;
 using FamChron.Web.Services.Contracts;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamChron.Web.Pages
@@ -10,9 +12,13 @@ namespace FamChron.Web.Pages
     {
         [Inject]
         ILoginService loginService { get; set; }
+
         public FormUser formUser {get; set;}
+
         [Inject]
         public NavigationManager navigationManager { get; set; }
+
+        private UserAuthStateProvider userAuthStateProvider;
 
 
         protected override async Task OnInitializedAsync()
@@ -30,7 +36,11 @@ namespace FamChron.Web.Pages
             };
 
             var result = loginService.Login(userDto);
-            navigationManager.NavigateTo($"/storycreator");
+            //var state = userAuthStateProvider.GetAuthenticationStateAsync;
+            if (result != null) 
+            {
+                navigationManager.NavigateTo($"/storycreator");
+            }
         }
 
     }
