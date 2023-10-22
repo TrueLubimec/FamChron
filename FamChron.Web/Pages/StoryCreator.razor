@@ -8,14 +8,13 @@
     <h1>Story creation</h1>
     <h3> So here you can add your story to your digital storage</h3>
 </div>
-
 <AuthorizeView>
     <Authorized>
         <div>
             <div class="col-lg-9 mx-auto rounded border p-3">
         
                 <form method="post">
-                    <EditForm Model="@newStory" OnValidSubmit="@Submit">
+                    <EditForm ChildContent Model="@newStory" OnValidSubmit="@Submit" >
                         <DataAnnotationsValidator />
                         <ValidationSummary />
                         <div class="row mb-3">
@@ -27,4 +26,7 @@
             </div>
         </div>
     </Authorized>
+    <NotAuthorized>
+
+    </NotAuthorized>
 </AuthorizeView>

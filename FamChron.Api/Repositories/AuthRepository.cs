@@ -14,10 +14,10 @@ namespace FamChron.Api.Repositories
         {
             this.famChronDbContext = famChronDbContext;
         }
-        public async Task<ActionResult<User>> Login(User user)
+        public async Task<User> Login(User user)
         {
             var result = await famChronDbContext.Users.FindAsync(user.id);
-            return null;
+            return result;
             
         }
 

@@ -7,7 +7,7 @@ namespace FamChron.Api.Repositories.Contracts
 {
     public interface IAuthRepository
     {
-        Task<ActionResult<User>> Login(User user);
+        Task<User> Login(User user);
 
         Task<User> Regitration(RegistrationUserDto user);
     }

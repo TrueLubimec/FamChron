@@ -15,7 +15,7 @@ namespace FamChron.Api.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public static User user = new User();
+        // public static User user = new User();
         private readonly IConfiguration _configuration;
         private readonly IAuthRepository authRepository;
         private readonly IUserRepository userRepository;
@@ -50,12 +50,16 @@ namespace FamChron.Api.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login(UserDto userDtoRequest)
         {
+            var loginUser = authRepository.Login(new User { 
+                                                                     id = userDtoRequest.UserId,
+                                                                     UserName = userDtoRequest.Name,
+                                                                     PasswordHash = userDtoRequest.Password})
             // лучше сделать один тест или одинаковые сообщения, чтобы сложнее ломануть
-            if (user.UserName != userDtoRequest.Name)
+            if (loginUser == null)
             {
                 return BadRequest("User not found.");
             }
-            if (!BCrypt.Net.BCrypt.Verify(userDtoRequest.Password, user.PasswordHash))
+            if (!BCrypt.Net.BCrypt.Verify(userDtoRequest.Password, loginUser.))
             {
                 return BadRequest("Wrong password.");
             }
