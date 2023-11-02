@@ -50,16 +50,19 @@ namespace FamChron.Api.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login(UserDto userDtoRequest)
         {
-            var loginUser = authRepository.Login(new User { 
-                                                                     id = userDtoRequest.UserId,
-                                                                     UserName = userDtoRequest.Name,
-                                                                     PasswordHash = userDtoRequest.Password})
+            var user = new User{
+                                        id = userDtoRequest.UserId,
+                                        UserName = userDtoRequest.Name,
+                                        PasswordHash = userDtoRequest.Password
+                                    };
+            var loginUser = await authRepository.Login(user);
             // лучше сделать один тест или одинаковые сообщения, чтобы сложнее ломануть
             if (loginUser == null)
             {
                 return BadRequest("User not found.");
             }
-            if (!BCrypt.Net.BCrypt.Verify(userDtoRequest.Password, loginUser.))
+            // loginUser.Result.PasswordHash
+            if (!BCrypt.Net.BCrypt.Verify(userDtoRequest.Password, loginUser.PasswordHash))
             {
                 return BadRequest("Wrong password.");
             }
