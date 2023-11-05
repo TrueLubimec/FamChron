@@ -3,6 +3,7 @@ using FamChron.Api.Entities;
 using FamChron.Api.Repositories.Contracts;
 using FamChron.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FamChron.Api.Repositories
 {
@@ -16,9 +17,8 @@ namespace FamChron.Api.Repositories
         }
         public async Task<User> Login(User user)
         {
-            var result = await famChronDbContext.Users.FindAsync(user.id);
+            var result = await famChronDbContext.Users.FirstOrDefaultAsync(name => name.UserName == user.UserName);
             return result;
-            
         }
 
         public async Task<User> Regitration(RegistrationUserDto @user)
