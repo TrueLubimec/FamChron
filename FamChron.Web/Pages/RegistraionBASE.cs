@@ -11,7 +11,9 @@ namespace FamChron.Web.Pages
         ILoginService loginService { get; set; }
 
         public RegistrationUserDto registrationUser {get; set;}
-
+        
+        [Inject]
+        public NavigationManager navigationManager { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -21,6 +23,11 @@ namespace FamChron.Web.Pages
         public async Task Registration()
         {
             var result = loginService.Register(registrationUser);
+            if (result != null)
+            {
+                navigationManager.NavigateTo($"/login");
+            }
+
         }
     }
 }

@@ -21,7 +21,7 @@ namespace FamChron.Web.Services
         {
             try
             {
-                var response = await this.httpClient.PostAsJsonAsync<UserDto>($"api/auth/login", user);
+                var response = await this.httpClient.PostAsJsonAsync<UserDto>($"api/Auth/login", user);
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
@@ -30,6 +30,7 @@ namespace FamChron.Web.Services
                         return null;
                     }
                     var token = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(token);
                     await localStorageService.SetItemAsync("token", token);
                     
                     await userAuthStateProvider.GetAuthenticationStateAsync();

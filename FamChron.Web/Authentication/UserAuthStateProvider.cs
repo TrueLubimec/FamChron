@@ -19,7 +19,7 @@ namespace FamChron.Web.Authentication
 
             if (!string.IsNullOrEmpty(token))
             {
-                userIdentity = new ClaimsIdentity(ParseClaimsFromJwt(token), "jwt");
+                userIdentity = new ClaimsIdentity(ParseClaimsFromJwt(token), "Jwt");
             }
 
             var user = new ClaimsPrincipal(userIdentity);
