@@ -10,7 +10,7 @@ namespace FamChron.Web.Services
     public class LoginService : ILoginService
     {
         private readonly HttpClient httpClient;
-        private ILocalStorageService localStorageService;
+        private ILocalStorageService localStorageService = new ;
         private UserAuthStateProvider userAuthStateProvider;
         public LoginService(HttpClient httpClient)
         {

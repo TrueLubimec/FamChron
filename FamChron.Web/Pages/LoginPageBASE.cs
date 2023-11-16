@@ -15,8 +15,8 @@ namespace FamChron.Web.Pages
 
         public FormUser formUser {get; set;}
 
-        //[Inject]
-        //public NavigationManager navigationManager { get; set; }
+        [Inject]
+        public NavigationManager navigationManager { get; set; }
 
 
         protected override async Task OnInitializedAsync()
@@ -34,6 +34,11 @@ namespace FamChron.Web.Pages
             };
 
             var result = loginService.Login(userDto);
+            
+            if (result != null)
+            {
+                navigationManager.NavigateTo($"/storycreator");
+            }
 
         }
 
