@@ -1,4 +1,5 @@
-﻿using FamChron.Models.Dtos;
+﻿using Blazored.LocalStorage.StorageOptions;
+using FamChron.Models.Dtos;
 using FamChron.Models.UIModels;
 using FamChron.Web.Authentication;
 using FamChron.Web.Services.Contracts;
@@ -10,7 +11,7 @@ namespace FamChron.Web.Services
     public class LoginService : ILoginService
     {
         private readonly HttpClient httpClient;
-        private ILocalStorageService localStorageService = new ;
+        private ILocalStorageService localStorageService;
         private UserAuthStateProvider userAuthStateProvider;
         public LoginService(HttpClient httpClient)
         {
@@ -30,9 +31,16 @@ namespace FamChron.Web.Services
                         return null;
                     }
                     var token = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(token);
-                    await localStorageService.SetItemAsync("token", token);
                     
+                    try
+                    {
+                        await localStorageService.SetItemAsync("token", token);
+                    }
+                    catch(Exception)
+                    {
+                        await Console.Out.WriteLineAsync("трабл с локалхранилищем");
+                        return null;
+                    }
                     await userAuthStateProvider.GetAuthenticationStateAsync();
                     return await response.Content.ReadFromJsonAsync<FormUser>();
 

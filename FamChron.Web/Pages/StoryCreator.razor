@@ -1,4 +1,4 @@
-﻿﻿@page "/storycreator"
+﻿@page "/storycreator"
 @inherits StoryCreatorBASE
 
 
@@ -14,14 +14,14 @@
             <div class="col-lg-9 mx-auto rounded border p-3">
         
                 <form method="post">
-                    <EditForm ChildContent Model="@newStory" OnValidSubmit="@Submit" >
+                   @* <EditForm ChildContent Model="@newStory" OnValidSubmit="@Submit" >
                         <DataAnnotationsValidator />
                         <ValidationSummary />
                         <div class="row mb-3">
                             <InputText Name="StoryName" @bind-Value="newStory.Name" />
                             <button type="submit">Let's listen to your new fascitanting story</button>
                         </div>
-                    </EditForm>
+                    </EditForm>*@
                 </form>
             </div>
         </div>
