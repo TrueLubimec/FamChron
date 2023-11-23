@@ -20,6 +20,7 @@ namespace FamChron.Web.Services
         //LATER !!!!!!!!
         public async Task<ActionResult<FormUser>> Login(UserDto user)
         {
+            
             try
             {
                 var response = await this.httpClient.PostAsJsonAsync<UserDto>($"api/Auth/login", user);
@@ -34,12 +35,11 @@ namespace FamChron.Web.Services
                     
                     try
                     {
-                        await localStorageService.SetItemAsync("token", token);
+                        await localStorageService.SetItemAsStringAsync("token", token);
                     }
                     catch(Exception)
                     {
                         await Console.Out.WriteLineAsync("трабл с локалхранилищем");
-                        return null;
                     }
                     await userAuthStateProvider.GetAuthenticationStateAsync();
                     return await response.Content.ReadFromJsonAsync<FormUser>();

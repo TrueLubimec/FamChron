@@ -18,6 +18,9 @@ namespace FamChron.Web.Pages
         [Inject]
         public NavigationManager navigationManager { get; set; }
 
+        
+        private UserAuthStateProvider userAuthStateProvider { get; set; }
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -33,9 +36,10 @@ namespace FamChron.Web.Pages
                 Password = formUser.Password
             };
 
-            var result = loginService.Login(userDto);
-            
-            if (result != null)
+            var result = await loginService.Login(userDto);
+            var authState = await userAuthStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            if (user.Identity is not null && user.Identity.IsAuthenticated)
             {
                 navigationManager.NavigateTo($"/storycreator");
             }
