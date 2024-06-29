@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamChron.Web", "FamChron.We
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "FamChron.WebUI", "FamChron.WebUI\FamChron.WebUI.esproj", "{9411D34A-A65E-4CCE-8F23-ED0AAF4292C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamChron.Gateway", "FamChron.Gateway\FamChron.Gateway.csproj", "{EAF62D8F-4843-437F-A08D-8D546E929B8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{9411D34A-A65E-4CCE-8F23-ED0AAF4292C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9411D34A-A65E-4CCE-8F23-ED0AAF4292C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9411D34A-A65E-4CCE-8F23-ED0AAF4292C1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EAF62D8F-4843-437F-A08D-8D546E929B8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF62D8F-4843-437F-A08D-8D546E929B8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF62D8F-4843-437F-A08D-8D546E929B8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF62D8F-4843-437F-A08D-8D546E929B8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

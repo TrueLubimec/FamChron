@@ -1,0 +1,6 @@
+@FamChron.Gateway_HostAddress = http://localhost:5174
+
+GET {{FamChron.Gateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
