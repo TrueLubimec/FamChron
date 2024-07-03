@@ -1,6 +1,8 @@
-﻿namespace FamChron.Api.Entities
+﻿using FamChron.Models.BaseModels;
+
+namespace FamChron.Api.Entities
 {
-    public class User
+    public class User : BaseUser
     {
         public int id { get; set; }
         public string UserName { get; set; } = string.Empty;

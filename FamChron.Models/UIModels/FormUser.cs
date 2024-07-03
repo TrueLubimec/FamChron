@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FamChron.Models.BaseModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace FamChron.Models.UIModels
 {
-    public class FormUser
+    public class FormUser : BaseUser // нужно подправить
     {
-        public int UserId { get; set; }
-
         [Display(Name = "your nickname")]
         [Required]
         [StringLength(30, ErrorMessage ="Name is too long")]
