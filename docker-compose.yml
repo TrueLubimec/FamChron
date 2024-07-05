@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  famchron.jwtservice:
+    image: ${DOCKER_REGISTRY-}famchronjwtservice
+    ports:
+      - "81:80"
+    networks:
+      - backend
+    build:
+      context: .
+      dockerfile: FamChron.JwtService/Dockerfile
+
+
+  famchron.api:
+    image: ${DOCKER_REGISTRY-}famchronapi
+    ports:
+      - "80:80"
+    networks:
+      - backend
+    build:
+      context: .
+      dockerfile: FamChron.Api/Dockerfile
+ 

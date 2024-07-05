@@ -1,4 +1,7 @@
-﻿using FamChron.JwtService.Repositories.Contracts;
+﻿using BCrypt.Net;
+using FamChron.JwtService.Entities;
+using FamChron.JwtService.JwtHandler.Contracts;
+using FamChron.JwtService.Repositories.Contracts;
 using FamChron.Models.Dtos;
 using FamChron.Models.UIModels;
 using Microsoft.AspNetCore.Http;
@@ -10,88 +13,59 @@ using System.Text;
 
 namespace FamChron.Api.Controllers
 {
+
+    // МБ ЧЕРЕЗ gRPC попробовать ??
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
         // public static User user = new User();
-        private readonly IConfiguration _configuration;
-        private readonly IAuthRepository authRepository;
-        private readonly IUserRepository userRepository;
+        private readonly IJwtHandler jwtHandler;
 
-        public AuthController(IConfiguration configuration, IAuthRepository authRepository, IUserRepository userRepository)
+        public AuthController(IJwtHandler jwtHandler)
         {
-            _configuration = configuration;
-            this.authRepository = authRepository;
-            this.userRepository = userRepository;
+            this.jwtHandler = jwtHandler;
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> Register ([FromBody]RegistrationUserDto userDtoRequest)
+        public async Task<ActionResult<UserAccount>> Authenticate([FromBody] AuthRequest authRequest)
         {
             try
             {
-                var newUser = await this.authRepository.Regitration(userDtoRequest);
-                if (newUser == null)
-                {
-                    return NoContent();
-                }
-                return Ok(newUser);
-                // return CreatedAtAction(nameof(userRepository.GetUser), new { id = newUser.Id }, newUser);
+                var authResponse = await jwtHandler.CreateToken(authRequest);
+                if (authRequest == null) return Unauthorized(); // СДЕЛАТЬ ОБРАБОТКУ ОШИБОК
+                return Ok(authResponse);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
 
         }
 
-        [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(UserDto userDtoRequest)
-        {
-            var user = new User{
-                                        id = userDtoRequest.UserId,
-                                        UserName = userDtoRequest.Name,
-                                        PasswordHash = userDtoRequest.Password
-                                    };
-            var loginUser = await authRepository.Login(user);
-            // лучше сделать один тест или одинаковые сообщения, чтобы сложнее ломануть
-            if (loginUser == null)
-            {
-                return BadRequest("User not found.");
-            }
-            // loginUser.Result.PasswordHash
-            if (!BCrypt.Net.BCrypt.Verify(userDtoRequest.Password, loginUser.PasswordHash))
-            {
-                return BadRequest("Wrong password.");
-            }
+        //[HttpPost("login")]
+        //public async Task<ActionResult<UserAccount>> AddToken(UserDto userDtoRequest)
+        //{
+        //    var user = new User{
+        //                                id = userDtoRequest.UserId,
+        //                                UserName = userDtoRequest.Name,
+        //                                PasswordHash = userDtoRequest.Password
+        //                            };
+        //    var loginUser = await authRepository.Login(user);
+        //    // лучше сделать один тест или одинаковые сообщения, чтобы сложнее ломануть
+        //    if (loginUser == null)
+        //    {
+        //        return BadRequest("User not found.");
+        //    }
+        //    // loginUser.Result.PasswordHash
+        //    if (!BCrypt.Net.BCrypt.Verify(userDtoRequest.Password, loginUser.PasswordHash))
+        //    {
+        //        return BadRequest("Wrong password.");
+        //    }
 
-            string token = CreateToken(user);
+        //    string token = CreateToken(user);
 
-            return Ok(token);
-        }
-
-        private string CreateToken(User user)
-        {
-            List<Claim> claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.UserName)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                                       _configuration.GetSection("Jwt:Token").Value!));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var token = new JwtSecurityToken(
-                    claims: claims,
-                    expires: DateTime.Now.AddDays(1),
-                    signingCredentials: creds
-                );
-
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return jwt;
-        }
+        //    return Ok(token);
+        //}
     }
 }

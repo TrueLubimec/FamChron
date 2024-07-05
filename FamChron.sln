@@ -13,7 +13,9 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "FamChron.WebUI", "FamChron.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamChron.Gateway", "FamChron.Gateway\FamChron.Gateway.csproj", "{EAF62D8F-4843-437F-A08D-8D546E929B8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamChron.JwtService", "FamChron.JwtService\FamChron.JwtService.csproj", "{6F928B9F-1D7C-440C-A490-0670E0CBF11B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamChron.JwtService", "FamChron.JwtService\FamChron.JwtService.csproj", "{6F928B9F-1D7C-440C-A490-0670E0CBF11B}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{1F92BBB0-4BC7-4690-B35C-204E906CAC63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{6F928B9F-1D7C-440C-A490-0670E0CBF11B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F928B9F-1D7C-440C-A490-0670E0CBF11B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F928B9F-1D7C-440C-A490-0670E0CBF11B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F92BBB0-4BC7-4690-B35C-204E906CAC63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F92BBB0-4BC7-4690-B35C-204E906CAC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F92BBB0-4BC7-4690-B35C-204E906CAC63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F92BBB0-4BC7-4690-B35C-204E906CAC63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,7 +15,8 @@ public class AuthDbContext
 
     public IDbConnection CreateConnection()
     {
-        var connectionString = $"host={dbSettings.Server} dbname={dbSettings.Database} user={dbSettings.User} password={dbSettings.Password} connection_timeout={dbSettings.ConnectionTimeOut}";
+        var connectionString = $"Host={dbSettings.Server}; Database={dbSettings.Database}; Username={dbSettings.User}; Password={dbSettings.Password};"; 
+            // $"host={dbSettings.Server}; dbname={dbSettings.Database}; user={dbSettings.User}; password={dbSettings.Password}; connection_timeout={dbSettings.ConnectionTimeOut}";
         return new NpgsqlConnection(connectionString);
     }
 

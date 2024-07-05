@@ -1,4 +1,4 @@
-﻿using FamChron.Api.Entities;
+﻿using FamChron.JwtService.Entities;
 using FamChron.Models.Dtos;
 using FamChron.Models.UIModels;
 using Microsoft.AspNetCore.Mvc;
@@ -7,8 +7,8 @@ namespace FamChron.JwtService.Repositories.Contracts
 {
     public interface IAuthRepository
     {
-        Task<User> Login(User user);
+        public Task AddToken(AuthResponse token);
 
-        Task<User> Regitration(RegistrationUserDto user);
+        // Task<UserAccount> Regitration(RegistrationUserDto user);
     }
 }
