@@ -16,6 +16,7 @@ namespace FamChron.JwtService.Repositories
         }
         public async Task AddToken(AuthResponse token)
         {
+            //TODO: error catch
             using var connection = authDbContext.CreateConnection();
             var sqlRequest = """INSERT INTO tokens (token, user_name, expires) VALUES (@Token, @UserName, @Expiration);""";
             await connection.ExecuteAsync(sqlRequest, token);

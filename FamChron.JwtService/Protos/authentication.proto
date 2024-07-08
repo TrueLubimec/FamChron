@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "FamChron.Gateway.Protos";
+
+service AuthenticationGrpcService{
+	rpc Authenticate(AuthenticationRequest) returns(AuthenticationResponse);
+}
+
+message AuthenticationRequest{
+	int32 id = 1;
+	string username = 2;
+	string password = 3;
+	string role = 4;
+}
+
+message AuthenticationResponse{
+	int32 id = 1;
+	string username = 2;
+	string token = 3;
+	int32 expiration = 4;
+}

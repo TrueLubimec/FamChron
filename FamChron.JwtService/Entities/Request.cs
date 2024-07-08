@@ -1,10 +1,13 @@
 ﻿namespace FamChron.JwtService.Entities
 {
-    public class AuthResponse
+    public class Request
     {
         public int id { get; set; }
+
         public string UserName { get; set; }
-        public string Token { get; set; }
-        public int Expiration { get; set; }
+
+        public string Password { get; set; }
+
+        public string Role { get; set; }
     }
 }

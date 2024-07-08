@@ -1,7 +1,7 @@
 ﻿using FamChron.JwtService.Entities;
 using FamChron.JwtService.JwtHandler.Contracts;
 using FamChron.JwtService.Repositories.Contracts;
-using Microsoft.Extensions.Configuration;
+using FamChron.Gateway.Protos;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -51,6 +51,7 @@ namespace FamChron.JwtService.JwtHandler
                 Expiration = expiration
             };
 
+            //TODO: error catch
             await authRepository.AddToken(response);
 
             return response; 

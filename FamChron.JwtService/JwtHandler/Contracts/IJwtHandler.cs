@@ -1,4 +1,5 @@
-﻿using FamChron.JwtService.Entities;
+﻿using FamChron.Gateway.Protos;
+using FamChron.JwtService.Entities;
 
 namespace FamChron.JwtService.JwtHandler.Contracts
 {

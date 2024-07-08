@@ -3,6 +3,8 @@ using FamChron.JwtService.JwtHandler;
 using FamChron.JwtService.JwtHandler.Contracts;
 using FamChron.JwtService.Repositories;
 using FamChron.JwtService.Repositories.Contracts;
+using FamChron.JwtService.Services;
+using FamChron.JwtService.Services.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -24,6 +26,9 @@ builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSetti
 builder.Services.AddSingleton<AuthDbContext>();
 builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+builder.Services.AddGrpc();
 
 builder.Services.AddAuthentication(a =>
 {
@@ -45,6 +50,7 @@ a.TokenValidationParameters = new TokenValidationParameters
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -56,6 +62,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapGrpcService<AuthenticationService>();
+
+//app.MapControllers();
 
 app.Run();

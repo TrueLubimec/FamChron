@@ -27,21 +27,22 @@ namespace FamChron.Api.Controllers
             this.jwtHandler = jwtHandler;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<UserAccount>> Authenticate([FromBody] AuthRequest authRequest)
-        {
-            try
-            {
-                var authResponse = await jwtHandler.CreateToken(authRequest);
-                if (authRequest == null) return Unauthorized(); // СДЕЛАТЬ ОБРАБОТКУ ОШИБОК
-                return Ok(authResponse);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
+        //[HttpPost]
+        //public async Task<ActionResult<UserAccount>> Authenticate([FromBody] AuthRequest authRequest)
+        //{
+        //    try
+        //    {
+        //        var authResponse = await jwtHandler.CreateToken(authRequest);
+        //        if (authRequest == null) return Unauthorized(); // СДЕЛАТЬ ОБРАБОТКУ ОШИБОК
+        //        return Ok(authResponse);
+        //    }
+        //    //TODO: сделать отлов под разные ошибки
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        //    }
 
-        }
+        //}
 
         //[HttpPost("login")]
         //public async Task<ActionResult<UserAccount>> AddToken(UserDto userDtoRequest)
