@@ -33,8 +33,11 @@
   </ItemGroup>
 
 
-	<ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\FamChron.Models\FamChron.Models.csproj" />
+	<Content Include="https\*">
+		<CopyToPublishDirectory>always</CopyToPublishDirectory>
+	</Content>
   </ItemGroup>
 
   <ItemGroup>
