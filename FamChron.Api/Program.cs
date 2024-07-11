@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<FamChronDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FamChronConnection")));
 
+// DI          TODO: Можно выделить в отдельный ServiceCollectionExtensions
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IStoryRepository, StoryRepository>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();

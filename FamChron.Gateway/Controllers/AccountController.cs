@@ -10,14 +10,14 @@ namespace MyApp.Namespace
     [ApiController]
     public class AccountController : ControllerBase
     {
-        
-        
-        public AccountController()
+        private ILoggerFactory loggerFactory;
+
+        public AccountController(ILoggerFactory loggerFactory)
         {
-            
+            this.loggerFactory = loggerFactory;
         }
 
-        //TODO: gRPC implementation to JwtHandler
+        //TODO: убрать хардкод(appsettings) и сделать connection удобнее
         [HttpPost]
         public async Task<ActionResult<AuthenticationResponse>> Authenticate([FromBody] UserDto userDto)
         {
@@ -31,9 +31,14 @@ namespace MyApp.Namespace
             {
                 AppContext.SetSwitch(
     "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-                var channel = GrpcChannel.ForAddress("https://localhost:7290");
+                var channel = GrpcChannel.ForAddress("https://localhost:7290",
+                                                                new GrpcChannelOptions { LoggerFactory = loggerFactory});
                 var client = new AuthenticationGrpcService.AuthenticationGrpcServiceClient(channel);
                 var response = client.Authenticate(request);
+                if (response == null) //check return!!
+                {
+                    return Unauthorized();
+                }
                 return Ok(response);
             }
             catch(Exception ex)

@@ -1,16 +1,29 @@
 version: '3.4'
 
-services:
-  famchron.jwtservice:
-    image: ${DOCKER_REGISTRY-}famchronjwtservice
-    ports:
-      - "81:80"
-    networks:
-      - backend
-    build:
-      context: .
-      dockerfile: FamChron.JwtService/Dockerfile
+networks:
+  backend:
+    external: true
+  rabbitmq_net:
+    driver: bridge
 
+services: 
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: serv.famchron.rabbitmq
+    container_name: 'serv.famchron.rabbitmq'
+    restart: always
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - rabbitmq_net    
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit disk_free_limit 2147483648
 
   famchron.api:
     image: ${DOCKER_REGISTRY-}famchronapi
@@ -21,4 +34,30 @@ services:
     build:
       context: .
       dockerfile: FamChron.Api/Dockerfile
- 
+
+  famchron.jwtservice:
+    image: ${DOCKER_REGISTRY-}famchronjwtservice
+    ports:
+        - "81:80"
+    networks:
+        - backend
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=https://+:443;http://+:80
+        - ASPNETCORE_Kestrel__Certificates__Default__Password=mypassword
+        - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/famchron.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    build:
+        context: .
+        dockerfile: FamChron.JwtService/Dockerfile
+
+  famchron.gateway:
+    image: ${DOCKER_REGISTRY-}famchrongateway
+    ports:
+        - "82:80"
+    networks:
+        - backend
+    build:
+        context: .
+        dockerfile: FamChron.Gateway/Dockerfile

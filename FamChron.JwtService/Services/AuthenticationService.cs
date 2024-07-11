@@ -17,7 +17,7 @@ namespace FamChron.JwtService.Services
 
         public override async Task<AuthenticationResponse> Authenticate(AuthenticationRequest authRequest, ServerCallContext contextn)
         {
-                var request = new AuthRequest
+            var request = new AuthRequest
             {
                 id = authRequest.Id,
                 UserName = authRequest.Username,
