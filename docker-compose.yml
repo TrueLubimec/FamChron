@@ -29,6 +29,8 @@ services:
     image: ${DOCKER_REGISTRY-}famchronapi
     ports:
       - "80:80"
+      - "5101:80"   # Important: In a production environment you should remove the external port (5101) kept here for microservice debugging purposes.
+                  # The API Gateway redirects and access through the internal port (80).
     networks:
       - backend
     build:
@@ -37,6 +39,7 @@ services:
 
   famchron.jwtservice:
     image: ${DOCKER_REGISTRY-}famchronjwtservice
+    hostname: famchron.jwtservice
     ports:
         - "81:80"
     networks:
@@ -54,6 +57,7 @@ services:
 
   famchron.gateway:
     image: ${DOCKER_REGISTRY-}famchrongateway
+    hostname: famchron.gateway
     ports:
         - "82:80"
     networks:

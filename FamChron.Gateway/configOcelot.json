@@ -1,0 +1,40 @@
+{
+  "ReRoutes": [
+    {
+      "SwaggerKey": "famchronapi",
+      "DownstreamPathTemplate": "/api/{version}/{everything}", //version?? при обновлении на новый контроллер, вроде
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "famchron.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/c/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "SwaggerKey": "famchronjwtservice",
+      "DownstreamPathTemplate": "/api/authenticate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "famchron.jwtservice",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/authenticate",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "AdministrationPath": "/administration"
+  },
+  "SwaggerEndPoints": []
+}
+    
